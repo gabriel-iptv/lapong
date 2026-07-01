@@ -3,322 +3,325 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Professional Login | UI/UX</title>
-    
+    <title>Professional Login</title>
+    <!-- Inter Font for modern typography -->
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-    <script src="https://unpkg.com/@phosphor-icons/web"></script>
-
+    <!-- FontAwesome for clean icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
-        :root {
-            --primary: #6366f1;
-            --primary-hover: #4f46e5;
-            --bg: #f3f4f6;
-            --text-main: #111827;
-            --text-muted: #6b7280;
-            --white: #ffffff;
-            --border: #e5e7eb;
-            --error: #ef4444;
-        }
-
         * {
-            box-sizing: border-box;
             margin: 0;
             padding: 0;
+            box-sizing: border-box;
             font-family: 'Inter', sans-serif;
         }
 
         body {
-            background-color: var(--bg);
-            background-image: radial-gradient(circle at 10% 20%, rgba(99, 102, 241, 0.05) 0%, transparent 20%),
-                              radial-gradient(circle at 90% 80%, rgba(99, 102, 241, 0.05) 0%, transparent 20%);
+            background-color: #f8fafc;
             display: flex;
+            height: 100vh;
+            overflow: hidden;
+        }
+
+        /* Split Screen Layout */
+        .login-container {
+            display: flex;
+            width: 100%;
+        }
+
+        /* Left Side: Branding/Visual */
+        .brand-side {
+            flex: 1.2;
+            background: linear-gradient(135deg, #1e3a8a 0%, #0f172a 100%);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            padding: 80px;
+            color: #ffffff;
+            position: relative;
+        }
+
+        .brand-side::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background: url('https://images.unsplash.com/photo-1557683316-973673baf926?auto=format&fit=crop&w=1200&q=80') no-repeat center center/cover;
+            opacity: 0.05;
+        }
+
+        .brand-content {
+            position: relative;
+            z-index: 1;
+            max-width: 500px;
+        }
+
+        .brand-logo {
+            font-size: 24px;
+            font-weight: 700;
+            letter-spacing: -0.5px;
+            margin-bottom: 60px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .brand-title {
+            font-size: 40px;
+            font-weight: 700;
+            line-height: 1.2;
+            margin-bottom: 20px;
+        }
+
+        .brand-subtitle {
+            font-size: 16px;
+            color: #94a3b8;
+            line-height: 1.6;
+        }
+
+        /* Right Side: Form */
+        .form-side {
+            flex: 1;
+            background-color: #ffffff;
+            display: flex;
+            flex-direction: column;
             justify-content: center;
             align-items: center;
-            min-height: 100vh;
+            padding: 40px;
+            box-shadow: -10px 0 30px rgba(0, 0, 0, 0.02);
         }
 
-        .login-card {
-            background: var(--white);
-            padding: 2.5rem;
-            border-radius: 1.25rem;
-            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.08);
+        .form-wrapper {
             width: 100%;
-            max-width: 420px;
-            transition: transform 0.3s ease;
+            max-width: 400px;
         }
 
-        header {
-            text-align: center;
-            margin-bottom: 2rem;
+        .form-header {
+            margin-bottom: 32px;
         }
 
-        header h2 {
-            font-size: 1.875rem;
-            color: var(--text-main);
+        .form-header h2 {
+            font-size: 28px;
             font-weight: 700;
-            letter-spacing: -0.025em;
+            color: #0f172a;
+            margin-bottom: 8px;
         }
 
-        header p {
-            color: var(--text-muted);
-            margin-top: 0.5rem;
-            font-size: 0.95rem;
+        .form-header p {
+            font-size: 14px;
+            color: #64748b;
         }
 
-        /* Input Styles */
-        .form-group {
-            margin-bottom: 1.25rem;
-        }
-
-        label {
-            display: block;
-            font-size: 0.875rem;
+        .form-header a {
+            color: #2563eb;
+            text-decoration: none;
             font-weight: 500;
-            color: var(--text-main);
-            margin-bottom: 0.5rem;
         }
 
-        .input-container {
+        .form-header a:hover {
+            text-decoration: underline;
+        }
+
+        /* Input Groups */
+        .input-group {
+            margin-bottom: 20px;
+            position: relative;
+        }
+
+        .input-group label {
+            display: block;
+            font-size: 14px;
+            font-weight: 500;
+            color: #334155;
+            margin-bottom: 6px;
+        }
+
+        .input-wrapper {
             position: relative;
             display: flex;
             align-items: center;
         }
 
-        .input-container i.prefix-icon {
+        .input-wrapper i {
             position: absolute;
-            left: 1rem;
-            color: var(--text-muted);
-            font-size: 1.25rem;
+            left: 16px;
+            color: #94a3b8;
+            font-size: 16px;
         }
 
-        input {
+        .input-wrapper input {
             width: 100%;
-            padding: 0.75rem 1rem 0.75rem 2.75rem;
-            border: 1px solid var(--border);
-            border-radius: 0.625rem;
-            font-size: 0.95rem;
+            padding: 14px 16px 14px 44px;
+            border: 1px solid #cbd5e1;
+            border-radius: 8px;
+            font-size: 15px;
+            color: #0f172a;
+            background-color: #f8fafc;
             transition: all 0.2s ease;
-            color: var(--text-main);
         }
 
-        input:focus {
+        .input-wrapper input:focus {
             outline: none;
-            border-color: var(--primary);
-            box-shadow: 0 0 0 4px rgba(99, 102, 241, 0.1);
+            border-color: #2563eb;
+            background-color: #ffffff;
+            box-shadow: 0 0 0 4px rgba(37, 99, 235, 0.1);
         }
 
-        .toggle-pass {
+        /* Toggle Password Eye */
+        .toggle-password {
             position: absolute;
-            right: 0.75rem;
-            background: none;
-            border: none;
-            color: var(--text-muted);
+            right: 16px;
+            left: auto !important;
             cursor: pointer;
-            padding: 0.25rem;
-            display: flex;
-            align-items: center;
+            color: #64748b !important;
+            transition: color 0.2s;
         }
 
-        /* Actions area */
-        .actions {
+        .toggle-password:hover {
+            color: #0f172a !important;
+        }
+
+        /* Form Utilities */
+        .form-utils {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            margin-bottom: 1.5rem;
-            font-size: 0.875rem;
+            margin-bottom: 24px;
+            font-size: 14px;
         }
 
         .remember-me {
             display: flex;
             align-items: center;
-            gap: 0.5rem;
+            gap: 8px;
+            color: #475569;
             cursor: pointer;
-            color: var(--text-muted);
         }
 
-        .forgot-link {
-            color: var(--primary);
+        .remember-me input {
+            width: 16px;
+            height: 16px;
+            border-radius: 4px;
+            border: 1px solid #cbd5e1;
+            cursor: pointer;
+        }
+
+        .forgot-password {
+            color: #2563eb;
             text-decoration: none;
-            font-weight: 600;
-        }
-
-        .forgot-link:hover { text-decoration: underline; }
-
-        /* Buttons */
-        .btn-primary {
-            width: 100%;
-            background: var(--primary);
-            color: white;
-            padding: 0.875rem;
-            border: none;
-            border-radius: 0.625rem;
-            font-weight: 600;
-            font-size: 1rem;
-            cursor: pointer;
-            transition: background 0.2s, transform 0.1s;
-        }
-
-        .btn-primary:hover { background: var(--primary-hover); }
-        .btn-primary:active { transform: scale(0.98); }
-
-        .divider {
-            display: flex;
-            align-items: center;
-            text-align: center;
-            margin: 1.5rem 0;
-            color: var(--text-muted);
-            font-size: 0.8rem;
-            text-transform: uppercase;
-            letter-spacing: 0.05em;
-        }
-
-        .divider::before, .divider::after {
-            content: '';
-            flex: 1;
-            border-bottom: 1px solid var(--border);
-        }
-
-        .divider::before { margin-right: .75em; }
-        .divider::after { margin-left: .75em; }
-
-        .btn-google {
-            width: 100%;
-            background: var(--white);
-            border: 1px solid var(--border);
-            padding: 0.75rem;
-            border-radius: 0.625rem;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 0.75rem;
             font-weight: 500;
-            cursor: pointer;
-            transition: background 0.2s;
         }
 
-        .btn-google:hover { background: #f9fafb; }
-
-        .footer-text {
-            text-align: center;
-            margin-top: 2rem;
-            font-size: 0.875rem;
-            color: var(--text-muted);
+        .forgot-password:hover {
+            text-decoration: underline;
         }
 
-        .footer-text a {
-            color: var(--primary);
-            text-decoration: none;
+        /* Primary Button */
+        .btn-submit {
+            width: 100%;
+            padding: 14px;
+            background-color: #2563eb;
+            color: #ffffff;
+            border: none;
+            border-radius: 8px;
+            font-size: 16px;
             font-weight: 600;
+            cursor: pointer;
+            transition: background-color 0.2s ease;
         }
 
-        /* Loading State Styling */
-        .btn-loading {
-            pointer-events: none;
-            opacity: 0.8;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            gap: 10px;
+        .btn-submit:hover {
+            background-color: #1d4ed8;
         }
 
-        .spinner {
-            width: 18px;
-            height: 18px;
-            border: 2px solid rgba(255,255,255,0.3);
-            border-top-color: #fff;
-            border-radius: 50%;
-            animation: spin 0.8s linear infinite;
+        /* Responsive Design */
+        @media (max-width: 900px) {
+            .brand-side {
+                display: none;
+            }
+            .form-side {
+                flex: 1;
+                padding: 24px;
+            }
         }
-
-        @keyframes spin { to { transform: rotate(360deg); } }
     </style>
 </head>
 <body>
 
-    <div class="login-card">
-        <header>
-            <h2>Sign In</h2>
-            <p>Welcome back! Enter your credentials.</p>
-        </header>
-
-        <form id="loginForm">
-            <div class="form-group">
-                <label for="email">Email address</label>
-                <div class="input-container">
-                    <i class="ph ph-envelope prefix-icon"></i>
-                    <input type="email" id="email" placeholder="you@example.com" required>
+    <div class="login-container">
+        <!-- Left Side Panel (Hidden on Mobile) -->
+        <div class="brand-side">
+            <div class="brand-content">
+                <div class="brand-logo">
+                    <i class="fa-solid fa-layer-group"></i> CoreSystems
                 </div>
+                <h1 class="brand-title">Simplify your workflow management.</h1>
+                <p class="brand-subtitle">Access your unified enterprise dashboard, real-time security analytics, and collaborative team infrastructure tools.</p>
             </div>
+        </div>
 
-            <div class="form-group">
-                <label for="password">Password</label>
-                <div class="input-container">
-                    <i class="ph ph-lock prefix-icon"></i>
-                    <input type="password" id="password" placeholder="••••••••" required>
-                    <button type="button" id="togglePassword" class="toggle-pass">
-                        <i class="ph ph-eye"></i>
-                    </button>
+        <!-- Right Side Login Form -->
+        <div class="form-side">
+            <div class="form-wrapper">
+                <div class="form-header">
+                    <h2>Welcome back</h2>
+                    <p>Don't have an account? <a href="#">Sign up</a></p>
                 </div>
+
+                <form id="loginForm" autocomplete="off">
+                    <!-- Email Input -->
+                    <div class="input-group">
+                        <label for="email">Email Address</label>
+                        <div class="input-wrapper">
+                            <i class="fa-regular fa-envelope"></i>
+                            <input type="email" id="email" placeholder="name@company.com" required>
+                        </div>
+                    </div>
+
+                    <!-- Password Input -->
+                    <div class="input-group">
+                        <label for="password">Password</label>
+                        <div class="input-wrapper">
+                            <i class="fa-solid fa-lock"></i>
+                            <input type="password" id="password" placeholder="••••••••" required>
+                            <i class="fa-regular fa-eye toggle-password" id="togglePassword"></i>
+                        </div>
+                    </div>
+
+                    <!-- Utilities -->
+                    <div class="form-utils">
+                        <label class="remember-me">
+                            <input type="checkbox" id="remember">
+                            Remember me
+                        </label>
+                        <a href="#" class="forgot-password">Forgot password?</a>
+                    </div>
+
+                    <!-- Submit Button -->
+                    <button type="submit" class="btn-submit">Sign in to Account</button>
+                </form>
             </div>
-
-            <div class="actions">
-                <label class="remember-me">
-                    <input type="checkbox"> Remember me
-                </label>
-                <a href="#" class="forgot-link">Forgot password?</a>
-            </div>
-
-            <button type="submit" id="submitBtn" class="btn-primary">Sign in</button>
-
-            <div class="divider">or continue with</div>
-
-            <button type="button" class="btn-google">
-                <img src="https://www.gstatic.com/images/branding/product/1x/gsa_512dp.png" width="20" alt="Google">
-                Google
-            </button>
-        </form>
-
-        <p class="footer-text">
-            Don't have an account? <a href="#">Sign up for free</a>
-        </p>
+        </div>
     </div>
 
+    <!-- UI Interaction Script -->
     <script>
-        const loginForm = document.getElementById('loginForm');
-        const submitBtn = document.getElementById('submitBtn');
-        const togglePassword = document.getElementById('togglePassword');
-        const passwordInput = document.getElementById('password');
+        // Password Visibility Toggle
+        const togglePassword = document.querySelector('#togglePassword');
+        const passwordInput = document.querySelector('#password');
 
-        // Toggle Password Visibility
-        togglePassword.addEventListener('click', () => {
-            const isPassword = passwordInput.type === 'password';
-            passwordInput.type = isPassword ? 'text' : 'password';
+        togglePassword.addEventListener('click', function () {
+            const type = passwordInput.getAttribute('type') === 'password' ? 'text' : 'password';
+            passwordInput.setAttribute('type', type);
             
-            const icon = togglePassword.querySelector('i');
-            icon.className = isPassword ? 'ph ph-eye-slash' : 'ph ph-eye';
+            // Toggle eye icon
+            this.classList.toggle('fa-eye');
+            this.classList.toggle('fa-eye-slash');
         });
 
-        // Form Submission Simulation
-        loginForm.addEventListener('submit', (e) => {
+        // Basic Submit Handling
+        document.getElementById('loginForm').addEventListener('submit', function(e) {
             e.preventDefault();
-
-            // Add loading state
-            const originalText = submitBtn.innerText;
-            submitBtn.classList.add('btn-loading');
-            submitBtn.innerHTML = `<div class="spinner"></div> Signing in...`;
-            
-            // Simulate API call
-            setTimeout(() => {
-                submitBtn.classList.remove('btn-loading');
-                submitBtn.innerText = "Success!";
-                submitBtn.style.background = "#10b981"; // Success green
-
-                setTimeout(() => {
-                    alert("Login Successful!");
-                    submitBtn.innerText = originalText;
-                    submitBtn.style.background = ""; // Reset to CSS variable
-                }, 1000);
-            }, 2000);
+            alert('Form submitted! Connect this handler to your backend auth API.');
         });
     </script>
 </body>
