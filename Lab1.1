@@ -1,0 +1,41 @@
+// ESP32 LED and Push Button Program
+
+// Named constants for pins
+const int RED_LED = 25;
+const int YELLOW_LED = 26;
+const int GREEN_LED = 27;
+const int BUTTON = 4;
+
+// Setup
+void setup() {
+  pinMode(RED_LED, OUTPUT);
+  pinMode(YELLOW_LED, OUTPUT);
+  pinMode(GREEN_LED, OUTPUT);
+
+  pinMode(BUTTON, INPUT_PULLUP);
+}
+
+// Function to blink an LED once
+void blinkOnce(int pin, int ms) {
+  digitalWrite(pin, HIGH);
+  delay(ms);
+
+  digitalWrite(pin, LOW);
+  delay(ms);
+}
+
+// Function to control the green LED using the button
+void checkButton() {
+  if (digitalRead(BUTTON) == LOW) {
+    digitalWrite(GREEN_LED, HIGH);
+  } else {
+    digitalWrite(GREEN_LED, LOW);
+  }
+}
+
+// Main loop
+void loop() {
+  blinkOnce(RED_LED, 500);
+  blinkOnce(YELLOW_LED, 500);
+  checkButton();
+}
